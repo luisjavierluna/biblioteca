@@ -1,6 +1,5 @@
 package com.egg.biblioteca.servicios;
 
-import com.egg.biblioteca.entidades.Autor;
 import com.egg.biblioteca.entidades.Editorial;
 import com.egg.biblioteca.repositorios.EditorialRepositorio;
 import java.util.ArrayList;
