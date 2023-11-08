@@ -2,6 +2,8 @@ package com.egg.biblioteca.controladores;
 
 import com.egg.biblioteca.excepciones.MiExcepcion;
 import com.egg.biblioteca.servicios.AutorServicio;
+import com.egg.biblioteca.servicios.EditorialServicio;
+import com.egg.biblioteca.servicios.LibroServicio;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,32 +15,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/autor") // localhost:8080/autor
-public class AutorControlador {
+@RequestMapping("/libro") // localhost:8080/libro
+public class LibroControlador {
+    
+    @Autowired
+    private LibroServicio libroServicio;
     
     @Autowired
     private AutorServicio autorServicio;
     
-    @GetMapping("/registrar") // localhost:8080/autor/registrar
+    @Autowired
+    private EditorialServicio editorialServicio;
+    
+    @GetMapping("/registrar") // localhost:8080/libro/registrar
     public String registrar() {
-        return "autor_form.html";
+        return "libro_form.html";
     }
     
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombre, ModelMap modelo) {
+    public String registro(
+        @RequestParam(required = false) Long isbn, 
+        @RequestParam String titulo, 
+        @RequestParam(required = false) Integer ejemplares, 
+        @RequestParam String idAutor, 
+        @RequestParam String idEditorial,
+        ModelMap modelo) {
         
         try {
             
-            autorServicio.crearAutor(nombre);
+            libroServicio.crearLibro(isbn, titulo, ejemplares, idAutor, idEditorial);
             
-            modelo.put("exito", "El autor fue cargado correctamente");
+            modelo.put("exito", "El libro fue cargado correctamente");
             
         } catch (MiExcepcion ex) {
             modelo.put("error", ex.getMessage());
-            return "autor_form.html";
+            return "libro_form.html";
         }
-        
         
         return "index.html";
     }
+    
+    
 }
