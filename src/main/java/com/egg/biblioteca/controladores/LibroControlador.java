@@ -1,11 +1,12 @@
 package com.egg.biblioteca.controladores;
 
+import com.egg.biblioteca.entidades.Autor;
+import com.egg.biblioteca.entidades.Editorial;
 import com.egg.biblioteca.excepciones.MiExcepcion;
 import com.egg.biblioteca.servicios.AutorServicio;
 import com.egg.biblioteca.servicios.EditorialServicio;
 import com.egg.biblioteca.servicios.LibroServicio;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,7 +29,13 @@ public class LibroControlador {
     private EditorialServicio editorialServicio;
     
     @GetMapping("/registrar") // localhost:8080/libro/registrar
-    public String registrar() {
+    public String registrar(ModelMap modelo) {
+        List<Autor> autores = autorServicio.listarAutores();
+        List<Editorial> editoriales = editorialServicio.listarEditoriales();
+        
+        modelo.addAttribute("autores", autores);
+        modelo.addAttribute("editoriales", editoriales);
+        
         return "libro_form.html";
     }
     
@@ -48,6 +55,13 @@ public class LibroControlador {
             modelo.put("exito", "El libro fue cargado correctamente");
             
         } catch (MiExcepcion ex) {
+            List<Autor> autores = autorServicio.listarAutores();
+            List<Editorial> editoriales = editorialServicio.listarEditoriales();
+
+            modelo.addAttribute("autores", autores);
+            modelo.addAttribute("editoriales", editoriales);
+            
+            
             modelo.put("error", ex.getMessage());
             return "libro_form.html";
         }
