@@ -2,6 +2,7 @@ package com.egg.biblioteca.controladores;
 
 import com.egg.biblioteca.entidades.Autor;
 import com.egg.biblioteca.entidades.Editorial;
+import com.egg.biblioteca.entidades.Libro;
 import com.egg.biblioteca.excepciones.MiExcepcion;
 import com.egg.biblioteca.servicios.AutorServicio;
 import com.egg.biblioteca.servicios.EditorialServicio;
@@ -69,5 +70,14 @@ public class LibroControlador {
         return "index.html";
     }
     
+    
+    @GetMapping("/lista")
+    public String listar(ModelMap modelo) {
+        List<Libro> libros = libroServicio.listarLibros();
+        
+        modelo.addAttribute("libros", libros);
+        
+        return "libro_list.html";
+    }
     
 }
