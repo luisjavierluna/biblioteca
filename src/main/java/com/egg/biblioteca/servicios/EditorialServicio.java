@@ -1,7 +1,7 @@
 package com.egg.biblioteca.servicios;
 
 import com.egg.biblioteca.entidades.Editorial;
-import com.egg.biblioteca.excepciones.MiExcepcion;
+import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.repositorios.EditorialRepositorio;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class EditorialServicio {
     EditorialRepositorio editorialRepositorio;
     
     @Transactional
-    public void crearEditorial(String nombre) throws MiExcepcion {
+    public void crearEditorial(String nombre) throws MiException {
         
         validar(nombre);
         
@@ -36,7 +36,7 @@ public class EditorialServicio {
         return editoriales;
     }
     
-    public void modificarEditorial(String id, String nombre) throws MiExcepcion {
+    public void modificarEditorial(String id, String nombre) throws MiException {
         
         validar(nombre);
         
@@ -51,10 +51,10 @@ public class EditorialServicio {
         }
     }
     
-    private void validar (String nombre) throws MiExcepcion {
+    private void validar (String nombre) throws MiException {
                
         if (nombre.isEmpty() || nombre == null) 
-            throw new MiExcepcion("El nombre no puede ser nulo o estar vacío");
+            throw new MiException("El nombre no puede ser nulo o estar vacío");
 
     }
 }

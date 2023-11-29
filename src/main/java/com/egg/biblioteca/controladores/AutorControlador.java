@@ -1,7 +1,7 @@
 package com.egg.biblioteca.controladores;
 
 import com.egg.biblioteca.entidades.Autor;
-import com.egg.biblioteca.excepciones.MiExcepcion;
+import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.servicios.AutorServicio;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,7 +36,7 @@ public class AutorControlador {
             
             modelo.put("exito", "El autor fue cargado correctamente");
             
-        } catch (MiExcepcion ex) {
+        } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             return "autor_form.html";
         }
@@ -66,7 +66,7 @@ public class AutorControlador {
             autorServicio.modificarAutor(nombre, id);
             
             return "redirect:../lista";
-        } catch (MiExcepcion ex) {
+        } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             return "autor_modificar.html";
         }

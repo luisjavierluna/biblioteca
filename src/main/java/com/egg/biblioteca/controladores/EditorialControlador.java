@@ -1,6 +1,6 @@
 package com.egg.biblioteca.controladores;
 
-import com.egg.biblioteca.excepciones.MiExcepcion;
+import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.servicios.EditorialServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class EditorialControlador {
             editorialServicio.crearEditorial(nombre);
             
             modelo.put("exito", "La Editorial fue registrada correctamente!");
-        } catch (MiExcepcion ex) {
+        } catch (MiException ex) {
                        
             modelo.put("error", ex.getMessage());
             return "editorial_form.html";

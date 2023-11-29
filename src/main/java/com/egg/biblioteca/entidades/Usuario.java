@@ -9,10 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Data @AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 public class Usuario implements Serializable {
 
     @Id

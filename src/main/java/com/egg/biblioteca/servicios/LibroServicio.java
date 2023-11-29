@@ -3,7 +3,7 @@ package com.egg.biblioteca.servicios;
 import com.egg.biblioteca.entidades.Autor;
 import com.egg.biblioteca.entidades.Editorial;
 import com.egg.biblioteca.entidades.Libro;
-import com.egg.biblioteca.excepciones.MiExcepcion;
+import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.repositorios.AutorRepositorio;
 import com.egg.biblioteca.repositorios.EditorialRepositorio;
 import com.egg.biblioteca.repositorios.LibroRepositorio;
@@ -26,7 +26,7 @@ public class LibroServicio {
     private EditorialRepositorio editorialRepositorio;
     
     @Transactional
-    public void crearLibro(Long isbn, String titulo, Integer Ejemplares, String idAutor, String idEditorial) throws MiExcepcion {
+    public void crearLibro(Long isbn, String titulo, Integer Ejemplares, String idAutor, String idEditorial) throws MiException {
         
         validar(isbn, titulo, Ejemplares, idAutor, idEditorial);
         
@@ -54,7 +54,7 @@ public class LibroServicio {
         return libros;
     }
     
-    public void modificarLibro(Long isbn, String titulo, String idAutor, String idEditorial, Integer ejemplares) throws MiExcepcion {
+    public void modificarLibro(Long isbn, String titulo, String idAutor, String idEditorial, Integer ejemplares) throws MiException {
         
         validar(isbn, titulo, ejemplares, idAutor, idEditorial);
         
@@ -80,20 +80,20 @@ public class LibroServicio {
         }       
     }
     
-    private void validar (Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial) throws MiExcepcion {
+    private void validar (Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial) throws MiException {
         if (isbn == null) 
-            throw new MiExcepcion("El isbn no puede ser nulo");
+            throw new MiException("El isbn no puede ser nulo");
         
         if (titulo.isEmpty() || titulo == null) 
-            throw new MiExcepcion("El título no puede ser nulo o estar vacío");
+            throw new MiException("El título no puede ser nulo o estar vacío");
         
         if (ejemplares == null) 
-            throw new MiExcepcion("Ejemplares no puede ser nulo");
+            throw new MiException("Ejemplares no puede ser nulo");
         
         if (idAutor.isEmpty() || idAutor == null) 
-            throw new MiExcepcion("El autor no puede ser nulo o estar vacío");
+            throw new MiException("El autor no puede ser nulo o estar vacío");
         
         if (idEditorial.isEmpty() || idEditorial == null) 
-            throw new MiExcepcion("La editorial no puede ser nulo o estar vacío");
+            throw new MiException("La editorial no puede ser nulo o estar vacío");
     }
 }

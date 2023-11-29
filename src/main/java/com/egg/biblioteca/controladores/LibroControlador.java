@@ -3,7 +3,7 @@ package com.egg.biblioteca.controladores;
 import com.egg.biblioteca.entidades.Autor;
 import com.egg.biblioteca.entidades.Editorial;
 import com.egg.biblioteca.entidades.Libro;
-import com.egg.biblioteca.excepciones.MiExcepcion;
+import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.servicios.AutorServicio;
 import com.egg.biblioteca.servicios.EditorialServicio;
 import com.egg.biblioteca.servicios.LibroServicio;
@@ -55,7 +55,7 @@ public class LibroControlador {
             
             modelo.put("exito", "El libro fue cargado correctamente");
             
-        } catch (MiExcepcion ex) {
+        } catch (MiException ex) {
             List<Autor> autores = autorServicio.listarAutores();
             List<Editorial> editoriales = editorialServicio.listarEditoriales();
 
