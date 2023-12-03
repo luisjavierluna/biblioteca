@@ -7,6 +7,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,5 +28,8 @@ public class Usuario implements Serializable {
     
     @Enumerated(EnumType.STRING)
     private Rol rol;
+    
+    @OneToOne
+    private Imagen imagen;
     
 }
