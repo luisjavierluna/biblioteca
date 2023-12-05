@@ -24,7 +24,7 @@ public class Libro implements Serializable {
     private Integer ejemplares;
     
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private Date alta;
     
     @ManyToOne // Muchos libros tienen un mismo autor
     private Autor autor;
