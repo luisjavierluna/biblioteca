@@ -1,6 +1,7 @@
 package com.egg.biblioteca.servicios;
 
 import com.egg.biblioteca.entidades.Autor;
+import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.repositorios.AutorRepositorio;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,9 @@ public class AutorServicio {
     }
     
     @Transactional
-    public void crearAutor(String nombre) {
+    public void crearAutor(String nombre) throws MiException {
+        validar(nombre);
+        
         Autor autor = new Autor();
         
         autor.setNombre(nombre);
@@ -37,7 +40,9 @@ public class AutorServicio {
     }
     
     @Transactional
-    public void modificarAutor(String nombre, String id) {
+    public void modificarAutor(String nombre, String id) throws MiException {
+        validar(nombre);
+        
         Optional<Autor> respuesta = autorRepositorio.findById(id);
         
         if (respuesta.isPresent()) {
@@ -58,5 +63,11 @@ public class AutorServicio {
             
             autorRepositorio.delete(autor);
         }
+    }
+    
+    private void validar (String nombre) throws MiException {
+               
+        if (nombre.isEmpty() || nombre == null) 
+            throw new MiException("El nombre no puede ser nulo o estar vacío");
     }
 }
